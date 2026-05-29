@@ -1,0 +1,70 @@
+---
+import Head from "@/components/Head.astro";
+import { SITE } from "@/config/site";
+import "@/styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  pathname?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  updatedTime?: string;
+  keywords?: readonly string[];
+}
+
+const {
+  title,
+  description,
+  pathname,
+  type = "website",
+  publishedTime,
+  updatedTime,
+  keywords
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <Head
+      title={title}
+      description={description}
+      pathname={pathname}
+      type={type}
+      publishedTime={publishedTime}
+      updatedTime={updatedTime}
+      keywords={keywords}
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a class="brand" href="/">
+          <span class="brand__mark">Y</span>
+          <span class="brand__copy">
+            <span class="brand__title">{SITE.title}</span>
+            <span class="brand__meta">{SITE.profile}</span>
+          </span>
+        </a>
+        <nav class="nav" aria-label="主要导航">
+          {SITE.nav.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main class="shell">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="shell site-footer__inner">
+        <p class="footer-note">
+          © {new Date().getFullYear()} {SITE.author}
+        </p>
+        <p class="footer-note">Built with Astro. Fast, simple, and content-first.</p>
+      </div>
+    </footer>
+  </body>
+</html>

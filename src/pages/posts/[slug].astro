@@ -1,0 +1,63 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import TagList from "@/components/TagList.astro";
+import { formatDate, getAllPosts } from "@/lib/posts";
+import { getPostPath } from "@/lib/site";
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const description = post.data.description;
+const pathname = getPostPath(post.slug);
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={description}
+  pathname={pathname}
+  type="article"
+  publishedTime={post.data.pubDate.toISOString()}
+  updatedTime={post.data.updatedDate?.toISOString()}
+  keywords={post.data.tags}
+>
+  <article class="post">
+    <div class="post-header">
+      <div class="post-topline">
+        <a href="/">All Posts</a>
+      </div>
+      <div class="post-header-top">
+        <div class="post-meta">
+          <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+          {post.data.updatedDate && (
+            <>
+              {" · 更新于 "}
+              <time datetime={post.data.updatedDate.toISOString()}>
+                {formatDate(post.data.updatedDate)}
+              </time>
+            </>
+          )}
+        </div>
+        <TagList tags={post.data.tags} className="post-tags" />
+      </div>
+      <h1 class="post-title">{post.data.title}</h1>
+      <p class="post-dek">{post.data.description}</p>
+    </div>
+    <div class="post-content">
+      <div class="content-body">
+        <Content />
+      </div>
+    </div>
+    <footer class="post-footer-nav">
+      <a href="/">← 返回全部文章</a>
+    </footer>
+  </article>
+</BaseLayout>

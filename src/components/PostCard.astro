@@ -1,0 +1,24 @@
+---
+import { formatDate } from "@/lib/posts";
+import { getPostPath } from "@/lib/site";
+import TagList from "@/components/TagList.astro";
+import type { BlogPost } from "@/lib/posts";
+
+interface Props {
+  post: BlogPost;
+  compact?: boolean;
+}
+
+const { post, compact = false } = Astro.props;
+---
+
+<article class:list={["card", compact && "card--compact"]}>
+  <div class="card__meta">
+    <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+  </div>
+  <h2 class="card__title">
+    <a href={getPostPath(post.slug)}>{post.data.title}</a>
+  </h2>
+  <p>{post.data.description}</p>
+  {!compact && <TagList tags={post.data.tags} className="card__tags" />}
+</article>

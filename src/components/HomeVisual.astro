@@ -1,0 +1,96 @@
+<aside class="home-visual" aria-hidden="true">
+  <div class="porthole">
+    <svg
+      class="porthole__svg"
+      viewBox="0 0 360 360"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <radialGradient
+          id="porthole-metal"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(126 110) rotate(50) scale(236)"
+        >
+          <stop offset="0" stop-color="#ffffff" />
+          <stop offset="0.45" stop-color="#efefef" />
+          <stop offset="1" stop-color="#d7d7d7" />
+        </radialGradient>
+        <radialGradient
+          id="porthole-inner"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(180 156) rotate(90) scale(164)"
+        >
+          <stop offset="0" stop-color="#1f1f1f" />
+          <stop offset="0.55" stop-color="#141414" />
+          <stop offset="1" stop-color="#090909" />
+        </radialGradient>
+        <linearGradient
+          id="earth-surface"
+          x1="102"
+          y1="214"
+          x2="266"
+          y2="312"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0" stop-color="#484848" />
+          <stop offset="0.55" stop-color="#2b2b2b" />
+          <stop offset="1" stop-color="#121212" />
+        </linearGradient>
+        <clipPath id="porthole-view">
+          <circle cx="180" cy="180" r="106" />
+        </clipPath>
+      </defs>
+
+      <g class="porthole__group">
+        <circle cx="180" cy="180" r="156" fill="rgba(0, 0, 0, 0.05)" />
+        <circle
+          cx="180"
+          cy="180"
+          r="144"
+          fill="url(#porthole-metal)"
+          stroke="rgba(17,17,17,0.12)"
+          stroke-width="2"
+        />
+        <circle cx="180" cy="180" r="126" fill="#efefec" stroke="rgba(255,255,255,0.75)" stroke-width="2" />
+        <circle cx="180" cy="180" r="108" fill="url(#porthole-inner)" />
+
+        <g clip-path="url(#porthole-view)">
+          <circle cx="102" cy="98" r="1.6" class="porthole-star porthole-star--soft" />
+          <circle cx="154" cy="82" r="1.6" class="porthole-star" />
+          <circle cx="242" cy="104" r="1.7" class="porthole-star porthole-star--soft" />
+          <circle cx="120" cy="152" r="1.6" class="porthole-star porthole-star--soft" />
+          <circle cx="228" cy="146" r="1.6" class="porthole-star" />
+
+          <circle cx="194" cy="318" r="156" fill="url(#earth-surface)" />
+          <path
+            d="M80 234C118 218 153 212 191 214C226 217 259 228 290 248"
+            class="earth-atmosphere earth-atmosphere--outer"
+          />
+          <path
+            d="M92 228C126 214 159 210 194 212C227 214 257 224 283 240"
+            class="earth-atmosphere"
+          />
+          <path
+            d="M124 244C146 238 168 235 192 237C216 239 238 246 258 256"
+            class="earth-contour"
+          />
+        </g>
+
+        <circle cx="180" cy="180" r="108" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" />
+        <g class="porthole-bolts">
+          <circle cx="180" cy="42" r="8" />
+          <circle cx="180" cy="318" r="8" />
+          <circle cx="42" cy="180" r="8" />
+          <circle cx="318" cy="180" r="8" />
+        </g>
+      </g>
+    </svg>
+  </div>
+</aside>

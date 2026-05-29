@@ -1,0 +1,43 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostCard from "@/components/PostCard.astro";
+import { getAllPosts, getAllTags, getPostsByTag } from "@/lib/posts";
+import { getTopicPath } from "@/lib/site";
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  const tags = getAllTags(posts);
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: getPostsByTag(posts, tag)
+    }
+  }));
+}
+
+const { tag, posts } = Astro.props;
+const title = `${tag} | 专题`;
+const description = `查看与“${tag}”相关的全部文章。`;
+---
+
+<BaseLayout title={title} description={description} pathname={getTopicPath(tag)} keywords={[tag]}>
+  <section class="topic-page-header">
+    <p class="eyebrow">Topic</p>
+    <h1 class="page-title">{tag}</h1>
+    <p class="topic-page-summary">围绕这个主题整理的全部文章，方便按专题连续阅读。</p>
+  </section>
+
+  <section class="section" aria-labelledby="topic-posts">
+    <div class="section-head">
+      <h2 id="topic-posts" class="section-title">Posts</h2>
+      <span class="section-label">{posts.length} Posts</span>
+    </div>
+    <div class="post-list">
+      {posts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

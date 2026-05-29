@@ -1,0 +1,128 @@
+media:
+  - name: post_images
+    label: Post Images
+    input: public/uploads/posts
+    output: /uploads/posts
+    categories: [image]
+    rename: safe
+
+content:
+  - name: posts
+    label: Blog Posts
+    type: collection
+    path: src/content/posts
+    format: yaml-frontmatter
+    subfolders: false
+    filename:
+      template: "{year}-{month}-{day}-{primary}.md"
+      field: create
+    view:
+      fields: [title, pubDate, updatedDate, draft, featured, tags]
+      primary: title
+      sort: [pubDate, updatedDate, title]
+      search: [title, description, tags]
+      default:
+        sort: pubDate
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+        options:
+          maxlength: 120
+
+      - name: description
+        label: Description
+        type: text
+        required: true
+        description: Brief summary used for the post card, SEO description, and RSS feed.
+        options:
+          minlength: 20
+          maxlength: 180
+
+      - name: pubDate
+        label: Publish Date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+
+      - name: updatedDate
+        label: Updated Date
+        type: date
+        default: ""
+        description: Optional. Fill this only when you significantly update the article later.
+        options:
+          format: yyyy-MM-dd
+
+      - name: draft
+        label: Draft
+        type: boolean
+        default: false
+        description: Draft posts are excluded from the site build.
+
+      - name: featured
+        label: Featured
+        type: boolean
+        default: false
+        description: Only one featured post is recommended for the homepage.
+
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+        description: Examples: marketing, AI, SEO, reading
+
+      - name: body
+        label: Body
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: post_images
+          switcher: true
+
+  - name: about_page
+    label: About Page
+    type: file
+    path: src/content/pages/about.md
+    format: yaml-frontmatter
+    operations:
+      delete: false
+      rename: false
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+
+      - name: description
+        label: Description
+        type: text
+        required: true
+        description: Used for the page intro in search engines and social sharing.
+        options:
+          minlength: 20
+          maxlength: 180
+
+      - name: body
+        label: Body
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: post_images
+          switcher: true
+
+settings:
+  hide: true
+  content:
+    merge: true
+  commit:
+    identity: app
+    templates:
+      create: "content(create): {path}"
+      update: "content(update): {path}"
+      delete: "content(delete): {path}"
+      rename: "content(rename): {oldPath} -> {newPath}"

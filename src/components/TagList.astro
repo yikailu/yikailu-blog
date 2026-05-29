@@ -1,0 +1,23 @@
+---
+import { getTopicPath } from "@/lib/site";
+
+interface Props {
+  tags: string[];
+  label?: string;
+  className?: string;
+}
+
+const { tags, label = "文章标签", className } = Astro.props;
+---
+
+{
+  tags.length > 0 && (
+    <div class:list={["tag-list", className]} aria-label={label}>
+      {tags.map((tag) => (
+        <a class="tag" href={getTopicPath(tag)}>
+          {tag}
+        </a>
+      ))}
+    </div>
+  )
+}

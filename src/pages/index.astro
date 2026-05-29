@@ -1,0 +1,81 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HomeVisual from "@/components/HomeVisual.astro";
+import PostCard from "@/components/PostCard.astro";
+import TagList from "@/components/TagList.astro";
+import { SITE } from "@/config/site";
+import { getAllPosts, getAllTags, getFeaturedPost, getRemainingPosts, formatDate } from "@/lib/posts";
+import { getPostPath, getTopicPath } from "@/lib/site";
+
+const posts = await getAllPosts();
+const featuredPost = getFeaturedPost(posts);
+const remainingPosts = getRemainingPosts(posts, featuredPost);
+const topics = getAllTags(posts);
+---
+<BaseLayout pathname="/" keywords={SITE.keywords}>
+  <section class="home-intro">
+    <div class="home-copy">
+      <p class="eyebrow">Blog</p>
+      <h1 class="home-title">{SITE.title}</h1>
+      <p class="home-summary">
+        记录工作复盘、学习方法、AI 工程实践和一些值得长期回看的判断。尽量写得清楚、克制、可复用。
+      </p>
+    </div>
+
+    <HomeVisual />
+  </section>
+
+  <nav class="topic-nav" aria-label="文章专题">
+    <a class="topic-chip topic-chip--active" href="#all-posts">All Posts</a>
+    {topics.map((tag) => (
+      <a class="topic-chip" href={getTopicPath(tag)}>
+        {tag}
+      </a>
+    ))}
+  </nav>
+
+  {featuredPost && (
+    <section class="section" aria-labelledby="featured-post">
+      <div class="section-head">
+        <h2 id="featured-post" class="section-title">Featured articles</h2>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-main">
+          <p class="eyebrow">精选文章</p>
+          <div class="feature-meta">
+            <time datetime={featuredPost.data.pubDate.toISOString()}>
+              {formatDate(featuredPost.data.pubDate)}
+            </time>
+          </div>
+          <h3>
+            <a href={getPostPath(featuredPost.slug)}>{featuredPost.data.title}</a>
+          </h3>
+          <p>{featuredPost.data.description}</p>
+          <TagList tags={featuredPost.data.tags} label="精选文章标签" className="card__tags" />
+        </article>
+
+        <div class="feature-stack">
+          {remainingPosts.slice(0, 3).map((post) => (
+            <PostCard post={post} compact={true} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section" aria-labelledby="latest-posts">
+    <div class="section-head">
+      <h2 id="all-posts" class="section-title">All Posts</h2>
+      <span class="section-label">{posts.length} Posts</span>
+    </div>
+    {posts.length > 0 ? (
+      <div class="post-list">
+        {posts.map((post) => (
+          <PostCard post={post} />
+        ))}
+      </div>
+    ) : (
+      <p class="empty">还没有文章，先写下你的第一篇工作或学习记录吧。</p>
+    )}
+  </section>
+</BaseLayout>

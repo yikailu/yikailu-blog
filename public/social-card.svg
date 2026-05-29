@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Yikai blog social card">
+  <rect width="1200" height="630" fill="#ffffff" />
+  <rect x="64" y="64" width="1072" height="502" rx="28" fill="#fcfcfc" stroke="#e6e6e6" />
+  <circle cx="132" cy="132" r="24" fill="#111111" />
+  <text x="176" y="145" fill="#111111" font-size="34" font-family="Inter, SF Pro Display, sans-serif">Yikai 的工作与学习笔记</text>
+  <text x="104" y="262" fill="#767676" font-size="26" font-family="Inter, SF Pro Display, sans-serif">Blog</text>
+  <text x="104" y="348" fill="#111111" font-size="76" font-family="Inter, SF Pro Display, sans-serif">
+    Work notes, learning systems,
+  </text>
+  <text x="104" y="430" fill="#111111" font-size="76" font-family="Inter, SF Pro Display, sans-serif">
+    and long-term thinking.
+  </text>
+  <line x1="104" y1="488" x2="1096" y2="488" stroke="#e6e6e6" />
+  <text x="104" y="530" fill="#767676" font-size="24" font-family="Inter, SF Pro Display, sans-serif">
+    Fast, simple, content-first.
+  </text>
+</svg>
