@@ -4,22 +4,20 @@ import HomeVisual from "@/components/HomeVisual.astro";
 import PostCard from "@/components/PostCard.astro";
 import TagList from "@/components/TagList.astro";
 import { SITE } from "@/config/site";
-import { getAllPosts, getAllTags, getFeaturedPost, getRemainingPosts, formatDate } from "@/lib/posts";
+import { getAllPosts, getFeaturedPost, getRemainingPosts, formatDate } from "@/lib/posts";
 import { getPostPath, getTopicPath } from "@/lib/site";
 
 const posts = await getAllPosts();
 const featuredPost = getFeaturedPost(posts);
 const remainingPosts = getRemainingPosts(posts, featuredPost);
-const topics = getAllTags(posts);
+const topics = SITE.topics;
 ---
 <BaseLayout pathname="/" keywords={SITE.keywords}>
   <section class="home-intro">
     <div class="home-copy">
       <p class="eyebrow">Blog</p>
       <h1 class="home-title">{SITE.title}</h1>
-      <p class="home-summary">
-        记录工作复盘、学习方法、AI 工程实践和一些值得长期回看的判断。尽量写得清楚、克制、可复用。
-      </p>
+      <p class="home-summary">{SITE.description}</p>
     </div>
 
     <HomeVisual />

@@ -1,12 +1,13 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PostCard from "@/components/PostCard.astro";
+import { SITE } from "@/config/site";
 import { getAllPosts, getAllTags, getPostsByTag } from "@/lib/posts";
 import { getTopicPath } from "@/lib/site";
 
 export async function getStaticPaths() {
   const posts = await getAllPosts();
-  const tags = getAllTags(posts);
+  const tags = [...new Set([...SITE.topics, ...getAllTags(posts)])];
 
   return tags.map((tag) => ({
     params: { tag },
@@ -34,10 +35,14 @@ const description = `查看与“${tag}”相关的全部文章。`;
       <h2 id="topic-posts" class="section-title">Posts</h2>
       <span class="section-label">{posts.length} Posts</span>
     </div>
-    <div class="post-list">
-      {posts.map((post) => (
-        <PostCard post={post} />
-      ))}
-    </div>
+    {posts.length > 0 ? (
+      <div class="post-list">
+        {posts.map((post) => (
+          <PostCard post={post} />
+        ))}
+      </div>
+    ) : (
+      <p class="empty">这个专题还没有文章，之后会优先在这里整理相关实践和思考。</p>
+    )}
   </section>
 </BaseLayout>
