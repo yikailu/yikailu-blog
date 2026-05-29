@@ -14,7 +14,6 @@ export const SITE = {
   socialImageAlt: "Yikai 的工作与学习笔记分享图",
   nav: [
     { href: "/", label: "首页" },
-    { href: "/about/", label: "关于" },
-    { href: "/rss.xml", label: "RSS" }
+    { href: "/about/", label: "关于" }
   ]
 } as const;

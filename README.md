@@ -6,7 +6,7 @@
 
 - 基于 Astro 静态生成，默认几乎零客户端 JavaScript
 - Markdown 内容管理，写作简单
-- 自带 RSS、站点地图、`robots.txt`
+- 自带站点地图、`robots.txt`
 - 页面结构语义化，便于搜索引擎理解
 - 样式轻量，移动端和桌面端都可用
 
@@ -26,7 +26,6 @@ cp .env.example .env
 然后把 `PUBLIC_SITE_URL` 改成你的真实域名。这个值会同时影响：
 
 - `canonical`
-- `RSS`
 - `sitemap`
 - `robots.txt`
 - Open Graph 分享链接
@@ -62,7 +61,7 @@ npm run preview
 说明：
 
 - `draft: true` 的文章不会出现在站点里
-- `description` 会同时用于首页摘要、SEO 描述和 RSS
+- `description` 会同时用于首页摘要和 SEO 描述
 - Pages CMS 只负责编辑 GitHub 仓库内容，不负责部署；保存后仍然走你原来的部署流程
 
 ## 你需要优先修改的地方
@@ -81,6 +80,6 @@ src/
   content/       Markdown 文章内容
   layouts/       全局布局
   lib/           文章与 URL 工具函数
-  pages/         首页、文章页、专题页、RSS、robots
+  pages/         首页、文章页、专题页、robots
   styles/        全局样式
 ```
