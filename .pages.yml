@@ -72,7 +72,7 @@ content:
         label: Tags
         type: string
         list: true
-        description: Examples: marketing, AI, SEO, reading
+        description: "Examples: 创业, SEO, AI相关, 实践方法"
 
       - name: body
         label: Body
