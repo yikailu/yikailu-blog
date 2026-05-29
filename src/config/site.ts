@@ -1,4 +1,4 @@
-const website = (import.meta.env.PUBLIC_SITE_URL || "https://example.com").replace(/\/$/, "");
+const website = (import.meta.env.PUBLIC_SITE_URL || "https://imai.chat").replace(/\/$/, "");
 
 export const SITE = {
   website,
