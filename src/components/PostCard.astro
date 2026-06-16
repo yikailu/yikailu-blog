@@ -17,7 +17,7 @@ const { post, compact = false } = Astro.props;
     <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
   </div>
   <h2 class="card__title">
-    <a href={getPostPath(post.slug)}>{post.data.title}</a>
+    <a class="card__link" href={getPostPath(post.slug)}>{post.data.title}</a>
   </h2>
   <p>{post.data.description}</p>
   {!compact && <TagList tags={post.data.tags} className="card__tags" />}

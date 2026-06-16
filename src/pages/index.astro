@@ -46,7 +46,9 @@ const topics = SITE.topics;
             </time>
           </div>
           <h3>
-            <a href={getPostPath(featuredPost.slug)}>{featuredPost.data.title}</a>
+            <a class="feature-main__link" href={getPostPath(featuredPost.slug)}>
+              {featuredPost.data.title}
+            </a>
           </h3>
           <p>{featuredPost.data.description}</p>
           <TagList tags={featuredPost.data.tags} label="精选文章标签" className="card__tags" />

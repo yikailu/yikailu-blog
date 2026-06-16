@@ -346,6 +346,7 @@ main {
 }
 
 .feature-main {
+  position: relative;
   padding: 1.7rem 1.8rem 1.8rem;
   background:
     radial-gradient(circle at top right, rgba(17, 17, 17, 0.05), transparent 28%),
@@ -382,6 +383,7 @@ main {
 }
 
 .card {
+  position: relative;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
@@ -430,6 +432,13 @@ main {
   letter-spacing: -0.03em;
 }
 
+.card__link::after,
+.feature-main__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
 .card p {
   margin: 0.68rem 0 0;
   color: #505050;
@@ -452,6 +461,8 @@ main {
   flex-wrap: wrap;
   gap: 0.4rem;
   margin-top: 0.9rem;
+  position: relative;
+  z-index: 1;
 }
 
 .tag {
